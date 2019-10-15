@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Praktikum</string>
+    <string-array name="spinner_Datenquellen">
+        <item>GPS</item>
+        <item>Netzwerkpositionierung</item>
+        <item>Accelerometer</item>
+        <item>Gyro</item>
+    </string-array>
+
+    <string-array name="spinner_SamplingFrequenzen">
+        <item>Normal</item>
+        <item>Gaming</item>
+        <item>Fastest</item>
+    </string-array>
+</resources>

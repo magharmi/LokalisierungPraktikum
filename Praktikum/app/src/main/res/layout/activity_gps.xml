@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GPS">
+
+    <Switch
+        android:id="@+id/switchOnOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Datensammlung aktiveren"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <TextView
+        android:id="@+id/textViewUeberschriftGPS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="37dp"
+        android:text="GPS"
+        app:layout_constraintBottom_toTopOf="@+id/textViewGPSKoordinaten"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewGPSKoordinaten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="19dp"
+        android:text="aktuelle Koordinaten\n\nX:\nY:\nZ:"
+        app:layout_constraintBottom_toTopOf="@+id/textViewUeberschriftKonfiguration"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUeberschriftGPS" />
+
+    <TextView
+        android:id="@+id/textViewUeberschriftKonfiguration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginBottom="15dp"
+        android:text="Konfiguration"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerSamplingFrequenzen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewGPSKoordinaten" />
+
+    <Spinner
+        android:id="@+id/spinnerSamplingFrequenzen"
+        android:layout_width="225dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="27dp"
+        android:entries="@array/spinner_SamplingFrequenzen"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSpeicherort"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewSamplingFrequenz"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUeberschriftKonfiguration" />
+
+    <TextView
+        android:id="@+id/textViewSamplingFrequenz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="22dp"
+        android:text="Sampling-Frequenz"
+        app:layout_constraintBaseline_toBaselineOf="@+id/spinnerSamplingFrequenzen"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerSamplingFrequenzen"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSpeicherort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="65dp"
+        android:text="Speicherort:"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSpeicherort"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSamplingFrequenz" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="361dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="245dp"
+        app:layout_constraintBottom_toTopOf="@+id/switchOnOff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSpeicherort">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewTimestampedLocations"
+                android:layout_width="330dp"
+                android:layout_height="match_parent"
+                android:text="Timestamped Locations\n\nX:\nY:\nZ:" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/buttonSpeicherort"
+        android:layout_width="216dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="95dp"
+        android:text="Speicherort wählen"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewSpeicherort"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSamplingFrequenzen" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
