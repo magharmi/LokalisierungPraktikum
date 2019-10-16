@@ -11,6 +11,7 @@ import android.widget.Spinner;
 public class MainActivity extends AppCompatActivity {
 
     Button buttonWeiter;
+    Spinner spinnerDatenquellen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +20,17 @@ public class MainActivity extends AppCompatActivity {
 
         //Initialisierung
         buttonWeiter = findViewById(R.id.buttonWeiter);
+        spinnerDatenquellen = findViewById(R.id.spinnerDatenquellen);
 
         buttonWeiter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, GPS.class));
+                if(spinnerDatenquellen.getSelectedItem().toString().equals("Accelerometer")) {
+                    startActivity(new Intent(MainActivity.this, Accelerometer.class));
+                }
+                else if(spinnerDatenquellen.getSelectedItem().toString().equals("GPS")){
+                    startActivity(new Intent(MainActivity.this, GPS.class));
+                }
             }
         });
 

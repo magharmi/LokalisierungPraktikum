@@ -9,6 +9,7 @@
 
     <string-array name="spinner_SamplingFrequenzen">
         <item>Normal</item>
+        <item>UI</item>
         <item>Gaming</item>
         <item>Fastest</item>
     </string-array>
