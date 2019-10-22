@@ -6,8 +6,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -34,7 +32,7 @@ public class Accelerometer extends AppCompatActivity {
         switchOnOff = findViewById(R.id.switchOnOff);
 
         textViewAccelerometerKoordinaten = findViewById(R.id.textViewAccelerometerKoordinaten);
-        spinnerSamplingFrequenzen = findViewById(R.id.spinnerSamplingFrequenzen);
+        spinnerSamplingFrequenzen = findViewById(R.id.spinnerGPSPriority);
         buttonSpeicherort = findViewById(R.id.buttonSpeicherort);
 
 

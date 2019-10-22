@@ -1,27 +1,17 @@
 package com.example.praktikum;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.google.android.gms.location.LocationRequest;
 
 public class GPS extends AppCompatActivity {
 
@@ -45,10 +35,9 @@ public class GPS extends AppCompatActivity {
         switchOnOff = findViewById(R.id.switchOnOff);
 
         textViewGPSKoordinaten = findViewById(R.id.textViewGPSKoordinaten);
-        spinnerSamplingFrequenzen = findViewById(R.id.spinnerSamplingFrequenzen);
+        spinnerSamplingFrequenzen = findViewById(R.id.spinnerGPSPriority);
         buttonSpeicherort = findViewById(R.id.buttonSpeicherort);
-
-        ActivityCompat.requestPermissions(GPS.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},123);
+        
 
         switchOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -57,7 +46,7 @@ public class GPS extends AppCompatActivity {
                     switchOnOff.setText("Datensammlung deaktivieren");
                     konfigurationAktiv(false);
                     gpsTracker = new GPSTracker(getApplicationContext());
-                    location = gpsTracker.getLocation();
+                    location = gpsTracker.getLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, 2000, 1000);
                 } else {
                     switchOnOff.setText("Datensammlung aktivieren");
                     konfigurationAktiv(true);

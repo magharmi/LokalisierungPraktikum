@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginBottom="19dp"
-        android:text="aktuelle Koordinaten\n\nLatitude:\nLongitude:"
+        android:text="aktuelle Koordinaten\n\nLatitude:\nLongitude:\nAltitude:"
         app:layout_constraintBottom_toTopOf="@+id/textViewUeberschriftKonfiguration"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewUeberschriftGPS" />
@@ -47,31 +47,31 @@
         android:layout_marginStart="14dp"
         android:layout_marginBottom="15dp"
         android:text="Konfiguration"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerSamplingFrequenzen"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerGPSPriority"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewGPSKoordinaten" />
 
     <Spinner
-        android:id="@+id/spinnerSamplingFrequenzen"
+        android:id="@+id/spinnerGPSPriority"
         android:layout_width="225dp"
         android:layout_height="32dp"
         android:layout_marginEnd="39dp"
         android:layout_marginBottom="27dp"
-        android:entries="@array/spinner_SamplingFrequenzen"
+        android:entries="@array/spinner_GPSPriority"
         app:layout_constraintBottom_toTopOf="@+id/buttonSpeicherort"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewSamplingFrequenz"
+        app:layout_constraintStart_toEndOf="@+id/textViewGPSPriority"
         app:layout_constraintTop_toBottomOf="@+id/textViewUeberschriftKonfiguration" />
 
     <TextView
-        android:id="@+id/textViewSamplingFrequenz"
+        android:id="@+id/textViewGPSPriority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginEnd="22dp"
-        android:text="Sampling-Frequenz"
-        app:layout_constraintBaseline_toBaselineOf="@+id/spinnerSamplingFrequenzen"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerSamplingFrequenzen"
+        android:text="GPS-Priorität"
+        app:layout_constraintBaseline_toBaselineOf="@+id/spinnerGPSPriority"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerGPSPriority"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -84,7 +84,7 @@
         android:text="Speicherort:"
         app:layout_constraintEnd_toStartOf="@+id/buttonSpeicherort"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSamplingFrequenz" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewGPSPriority" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -119,6 +119,6 @@
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewSpeicherort"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSamplingFrequenzen" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerGPSPriority" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
