@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Gyro">
+
+    <TextView
+        android:id="@+id/textViewUeberschriftGyro"
+        android:layout_width="34dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="183dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="194dp"
+        android:layout_marginBottom="678dp"
+        android:text="Gyro" />
+
+    <TextView
+        android:id="@+id/textViewGyrosskopKoordinaten"
+        android:layout_width="377dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="536dp"
+        android:text="aktuelle Koordinaten\n\n X:\n Y:\n Z:" />
+
+    <TextView
+        android:id="@+id/textViewUeberschriftKonfiguration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="312dp"
+        android:layout_marginBottom="485dp"
+        android:text="Konfiguration" />
+
+    <TextView
+        android:id="@+id/textViewGPSPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="299dp"
+        android:layout_marginEnd="277dp"
+        android:layout_marginBottom="413dp"
+        android:text="Sampling-Frequenz" />
+
+    <Button
+        android:id="@+id/buttonSpeicherort"
+        android:layout_width="191dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="198dp"
+        android:layout_marginTop="410dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="270dp"
+        android:text="Speicherort wählen" />
+
+    <TextView
+        android:id="@+id/textViewSpeicherort"
+        android:layout_width="89dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="307dp"
+        android:layout_marginBottom="286dp"
+        android:text="Speicherort:" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="148dp"
+        android:text="Timestamped Locations\n\n X:\n Y:\n Z:" />
+
+    <Switch
+        android:id="@+id/switchOnOff"
+        android:layout_width="219dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="178dp"
+        android:layout_marginBottom="46dp"
+        android:text="Datensammlung aktiveren" />
+
+    <Spinner
+        android:id="@+id/spinnerGPSPriority"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="407dp"
+        android:entries="@array/spinner_SamplingFrequenzen" />
+</RelativeLayout>
