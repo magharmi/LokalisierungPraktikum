@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
                 else if(spinnerDatenquellen.getSelectedItem().toString().equals("GPS")){
                     startActivity(new Intent(MainActivity.this, GPS.class));
                 }
+                else if(spinnerDatenquellen.getSelectedItem().toString().equals("Gyro")){
+                    startActivity(new Intent(MainActivity.this, Gyro.class));
+                }
             }
         });
 
