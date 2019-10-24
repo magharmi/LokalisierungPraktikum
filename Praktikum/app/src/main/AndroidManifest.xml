@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Accelerometer"></activity>
         <activity android:name=".GPS" />
+        <activity android:name=".Gyro"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
