@@ -11,15 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="500dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="636dp"
         android:text="Datensammlung aktiveren"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewUeberschriftGPS"
@@ -30,21 +28,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewGPSKoordinaten"
-        android:layout_width="wrap_content"
-        android:layout_height="88dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="600dp"
-        android:text="aktuelle Koordinaten\n\nLatitude:\nLongitude:\nAltitude:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textViewUeberschriftKonfiguration"
@@ -74,22 +57,50 @@
         android:id="@+id/textViewGPSPriority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="392dp"
         android:text="GPS-Priorität"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewAdresse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="22dp"
+        android:text="Adresse:"
+        app:layout_constraintBottom_toTopOf="@+id/textViewUeberschriftKonfiguration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textViewGPSKoordinaten"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="600dp"
+        android:text="aktuelle Koordinaten\n\nLatitude:\nLongitude:\nAltitude:"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="354dp"
         android:layout_height="90dp"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/switchOnOff"
+        android:layout_marginTop="540dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -108,36 +119,26 @@
         android:id="@+id/buttonSpeicherort"
         android:layout_width="216dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="420dp"
         android:text="Speicherort wählen"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.856"
+        app:layout_constraintHorizontal_bias="0.851"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerGPSPriority"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textViewAdresse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="22dp"
-        android:text="Adresse:"
-        app:layout_constraintBottom_toTopOf="@+id/textViewUeberschriftKonfiguration"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGPSKoordinaten" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.085" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewGPSPriority"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.004"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.402">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputIntervall"
@@ -151,15 +152,25 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.173">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputFastestIntervall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="FastestIntervall" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputFastestIntervall"
+        android:layout_width="151dp"
+        android:layout_height="46dp"
+        android:hint="FastestIntervall"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.297" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
