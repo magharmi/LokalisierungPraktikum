@@ -2,6 +2,7 @@ package com.example.praktikum;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -10,13 +11,17 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.location.Address;
 
 import com.google.android.gms.location.LocationRequest;
+
+import java.io.IOException;
+import java.util.List;
 
 public class GPS extends AppCompatActivity {
 
     Switch switchOnOff;
-    TextView textViewGPSKoordinaten;
+    TextView textViewGPSKoordinaten, textViewAdresse;
     Spinner spinnerSamplingFrequenzen;
     Button buttonSpeicherort;
     GPSTracker gpsTracker;
@@ -35,6 +40,7 @@ public class GPS extends AppCompatActivity {
         switchOnOff = findViewById(R.id.switchOnOff);
 
         textViewGPSKoordinaten = findViewById(R.id.textViewGPSKoordinaten);
+        textViewAdresse = findViewById(R.id.textViewAdresse);
         spinnerSamplingFrequenzen = findViewById(R.id.spinnerGPSPriority);
         buttonSpeicherort = findViewById(R.id.buttonSpeicherort);
         
