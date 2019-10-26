@@ -6,6 +6,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.location.Address;
 
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,6 +24,7 @@ public class GPS extends AppCompatActivity {
 
     Switch switchOnOff;
     TextView textViewGPSKoordinaten, textViewAdresse;
+    TextInputEditText textInputIntervall, textInputFastestIntervall;
     Spinner spinnerSamplingFrequenzen;
     Button buttonSpeicherort;
     GPSTracker gpsTracker;
@@ -33,11 +36,15 @@ public class GPS extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         gps = this;
 
         //Initialisierung
         switchOnOff = findViewById(R.id.switchOnOff);
+
+        textInputFastestIntervall = findViewById(R.id.textInputFastestIntervall);
+        textInputIntervall = findViewById(R.id.textInputIntervall);
 
         textViewGPSKoordinaten = findViewById(R.id.textViewGPSKoordinaten);
         textViewAdresse = findViewById(R.id.textViewAdresse);
@@ -52,7 +59,8 @@ public class GPS extends AppCompatActivity {
                     switchOnOff.setText("Datensammlung deaktivieren");
                     konfigurationAktiv(false);
                     gpsTracker = new GPSTracker(getApplicationContext());
-                    location = gpsTracker.getLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, 2000, 1000);
+                    gpsTracker.setLocationRequest(LocationRequest.PRIORITY_HIGH_ACCURACY, Integer.parseInt(textInputIntervall.getText().toString()), Integer.parseInt(textInputFastestIntervall.getText().toString()));
+                    location = gpsTracker.getLocation();
                 } else {
                     switchOnOff.setText("Datensammlung aktivieren");
                     konfigurationAktiv(true);

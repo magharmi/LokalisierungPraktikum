@@ -38,19 +38,12 @@ public class GPSTracker implements LocationListener {
         context = c;
     }
 
-    public Location getLocation(int priority, long interval, long fastestInterval){
+    public Location getLocation(){
         if(ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(GPS.getInstance(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
             Toast.makeText(context,"Berechtigungen nicht gegeben", Toast.LENGTH_SHORT).show();
             return null;
         }
-        this.priority = priority;
-        this.interval = interval;
-        this.fastestInterval = fastestInterval;
-        locationRequest = new LocationRequest();
-        locationRequest.setPriority(priority);
-        locationRequest.setInterval(interval);
-        locationRequest.setFastestInterval(fastestInterval);
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if(isGPSEnabled){
@@ -62,6 +55,17 @@ public class GPSTracker implements LocationListener {
             Toast.makeText(context,"Bitte GPS aktivieren", Toast.LENGTH_LONG).show();
         }
         return null;
+    }
+
+    public void setLocationRequest(int priority, int interval, int fastestInterval){
+        this.priority = priority;
+        this.interval = interval;
+        this.fastestInterval = fastestInterval;
+        locationRequest = new LocationRequest();
+        locationRequest.setPriority(priority);
+        locationRequest.setInterval(interval);
+        locationRequest.setFastestInterval(fastestInterval);
+        Log.e("LocationRequest", "Interval: " + locationRequest.getInterval() + " FastestIntervall " + locationRequest.getFastestInterval());
     }
 
     public void getAdresse(Location location){
@@ -81,7 +85,7 @@ public class GPSTracker implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        getLocation(priority, interval, fastestInterval);
+        getLocation();
         if(location != null && datensammlungAktiv == true) {
             GPS.getInstance().textViewGPSKoordinaten.setText("aktuelle Koordinaten\n\nLatitude: "+location.getLatitude()+"\nLongitude: "+location.getLongitude()+"\nAltitude: "+location.getAltitude());
             getAdresse(location);
