@@ -25,7 +25,7 @@ public class Gyro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accelerometer);
+        setContentView(R.layout.activity_gyro);
 
         //Initialisierung
         sensorMan = (SensorManager) getSystemService(SENSOR_SERVICE);

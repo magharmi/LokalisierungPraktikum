@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 
 import java.io.IOException;
@@ -29,7 +30,6 @@ public class GPSTracker implements LocationListener {
 
     int priority;
     long interval, fastestInterval;
-    TextView textViewAdresse;
 
     boolean datensammlungAktiv = true;
 
@@ -80,14 +80,11 @@ public class GPSTracker implements LocationListener {
         }
     }
 
-
-
-
     @Override
     public void onLocationChanged(Location location) {
-        getLocation();
         if(location != null && datensammlungAktiv == true) {
             GPS.getInstance().textViewGPSKoordinaten.setText("aktuelle Koordinaten\n\nLatitude: "+location.getLatitude()+"\nLongitude: "+location.getLongitude()+"\nAltitude: "+location.getAltitude());
+            GPS.getInstance().textViewTimestampedLocations.append("\n\nLatitude: "+location.getLatitude()+"\nLongitude: "+location.getLongitude()+"\nAltitude: "+location.getAltitude());
             getAdresse(location);
         }
     }
