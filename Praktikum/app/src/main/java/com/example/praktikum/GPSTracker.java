@@ -27,6 +27,7 @@ import java.util.List;
 public class GPSTracker implements LocationListener {
     LocationRequest locationRequest;
     Geocoder geocoder;
+    Rest rest;
 
     int priority;
     long interval, fastestInterval;
@@ -83,8 +84,10 @@ public class GPSTracker implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         if(location != null && datensammlungAktiv == true) {
+            Rest rest = new Rest(context);
             GPS.getInstance().textViewGPSKoordinaten.setText("aktuelle Koordinaten\n\nLatitude: "+location.getLatitude()+"\nLongitude: "+location.getLongitude()+"\nAltitude: "+location.getAltitude());
             GPS.getInstance().textViewTimestampedLocations.append("\n\nLatitude: "+location.getLatitude()+"\nLongitude: "+location.getLongitude()+"\nAltitude: "+location.getAltitude());
+            rest.postData(location.getLatitude(), location.getLongitude(), location.getAltitude());
             getAdresse(location);
         }
     }

@@ -33,7 +33,7 @@ public class Accelerometer extends AppCompatActivity {
 
         textViewAccelerometerKoordinaten = findViewById(R.id.textViewAccelerometerKoordinaten);
         spinnerSamplingFrequenzen = findViewById(R.id.spinnerGPSPriority);
-        buttonSpeicherort = findViewById(R.id.buttonSpeicherort);
+        buttonSpeicherort = findViewById(R.id.buttonSessionAnlegen);
 
 
         final SensorEventListener sensEventList = new SensorEventListener() {

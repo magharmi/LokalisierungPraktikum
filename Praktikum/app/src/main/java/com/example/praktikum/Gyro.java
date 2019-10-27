@@ -33,7 +33,7 @@ public class Gyro extends AppCompatActivity {
 
         textViewGyrosskopKoordinaten = findViewById(R.id.textViewGyrosskopKoordinaten);
         spinnerSamplingFrequenzen = findViewById(R.id.spinnerGPSPriority);
-        buttonSpeicherort = findViewById(R.id.buttonSpeicherort);
+        buttonSpeicherort = findViewById(R.id.buttonSessionAnlegen);
 
 
         final SensorEventListener sensEventList = new SensorEventListener() {

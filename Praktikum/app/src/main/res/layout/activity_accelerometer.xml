@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewUeberschriftKonfiguration" />
 
     <Button
-        android:id="@+id/buttonSpeicherort"
+        android:id="@+id/buttonSessionAnlegen"
         android:layout_width="216dp"
         android:layout_height="64dp"
         android:layout_marginStart="179dp"
