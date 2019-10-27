@@ -64,9 +64,7 @@ public class GPS extends AppCompatActivity {
                 if (isChecked == true) {
                     switchOnOff.setText("Datensammlung deaktivieren");
                     konfigurationAktiv(false);
-                    if(sessionSpeichern == true){
-                        rest.postSession(textInputName.getText().toString(), textInputBeschreibung.getText().toString());
-                    }
+                    rest.postSession(textInputName.getText().toString(), textInputBeschreibung.getText().toString());
                     gpsTracker = new GPSTracker(getApplicationContext());
                     gpsTracker.setLocationRequest(LocationRequest.PRIORITY_HIGH_ACCURACY, Integer.parseInt(textInputIntervall.getText().toString()), Integer.parseInt(textInputFastestIntervall.getText().toString()));
                     location = gpsTracker.getLocation();

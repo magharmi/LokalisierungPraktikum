@@ -21,9 +21,9 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 
 public class Rest {
-    static Rest rest;
 
-    int trackid;
+    static int trackid;
+    static boolean postTrackStarten;
 
     Context context;
     public Rest(Context c){
@@ -74,6 +74,8 @@ public class Rest {
                     response = response.substring(0, response.indexOf(","));
                     trackid = Integer.parseInt(response);
                     Log.e("trackid", getTrackid()+"");
+                    postTrackStarten = true;
+                    Log.e("postTrackStarten", getPostTrackStarten()+"");
                 }
                     },
                     new Response.ErrorListener() {
@@ -110,7 +112,6 @@ public class Rest {
 
         String URL = "http://pi-bo.dd-dns.de:8080/LM-Server/api/v2/data";
         try {
-            Log.e("Test", "ok");
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("teamid", 25);
             jsonBody.put("latitude", latitude);
@@ -120,7 +121,7 @@ public class Rest {
             jsonBody.put("trackid", getTrackid());
             jsonBody.put("session", "Low Power");
             jsonBody.put("counter", 1);
-            final String requestBody = jsonBody.toString();
+            final String requestBody = "["+jsonBody.toString()+"]";
             Log.e("Test", requestBody);
 
             RequestQueue requestQueue = Volley.newRequestQueue(context.getApplicationContext());
@@ -162,6 +163,10 @@ public class Rest {
 
     public int getTrackid() {
         return trackid;
+    }
+
+    public boolean getPostTrackStarten(){
+        return postTrackStarten;
     }
 
 }
