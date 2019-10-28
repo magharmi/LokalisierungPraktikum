@@ -86,7 +86,6 @@ public class GPSTracker implements LocationListener {
             Rest rest = new Rest(context);
             GPS.getInstance().textViewGPSKoordinaten.setText("aktuelle Koordinaten\n\nLatitude: "+location.getLatitude()+"\nLongitude: "+location.getLongitude()+"\nAltitude: "+location.getAltitude());
             GPS.getInstance().textViewTimestampedLocations.append("\n\nLatitude: "+location.getLatitude()+"\nLongitude: "+location.getLongitude()+"\nAltitude: "+location.getAltitude());
-            Log.e("POSTTRACKSTARTEN", Rest.postTrackStarten+"");
             if(rest.getPostTrackStarten() == true) {
                 rest.postData(location.getLatitude(), location.getLongitude(), location.getAltitude());
             }

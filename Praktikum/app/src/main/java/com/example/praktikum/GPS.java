@@ -67,7 +67,7 @@ public class GPS extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked == true) {
-                    switchOnOff.setText("Datensammlung deaktivieren");
+                    switchOnOff.setText("Datensammlung aktiviert");
                     konfigurationAktiv(false);
                     rest.postSession(textInputName.getText().toString(), textInputBeschreibung.getText().toString());
                     gpsTracker = new GPSTracker(getApplicationContext());
@@ -75,7 +75,7 @@ public class GPS extends AppCompatActivity {
                     //Log.e("GPSPriority", getGPSPriority()+"");
                     location = gpsTracker.getLocation();
                 } else {
-                    switchOnOff.setText("Datensammlung aktivieren");
+                    switchOnOff.setText("Datensammlung deaktiviert");
                     konfigurationAktiv(true);
                     gpsTracker.datensammlungAktiv = false;
                 }
@@ -86,11 +86,11 @@ public class GPS extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked == true){
-                    switchOnOff.setText("Session nicht speichern");
+                    switchSessionSpeichern.setText("Session wird gespeichert");
                     sessionSpeichern = true;
                 }
                 else{
-                    switchSessionSpeichern.setText("Session speichern");
+                    switchSessionSpeichern.setText("Session wird nicht gespeichert");
                     sessionSpeichern = false;
                 }
             }
@@ -111,6 +111,7 @@ public class GPS extends AppCompatActivity {
         textInputIntervall.setEnabled(aktivDeaktiv);
         textInputFastestIntervall.setEnabled(aktivDeaktiv);
         buttonLaden.setEnabled(aktivDeaktiv);
+        textInputTrackid.setEnabled(aktivDeaktiv);
     }
 
     public int getGPSPriority(){
