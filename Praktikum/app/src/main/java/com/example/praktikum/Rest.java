@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -13,7 +12,6 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.location.LocationRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,6 +68,12 @@ public class Rest {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.e("getData", response.toString());
+                        GPS.getInstance().textViewTimestampedLocations.setText(response.toString());
+                        try {
+                            datenVerarbeitenUndAusgeben(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener(){
@@ -80,6 +84,45 @@ public class Rest {
                 }
         );
         requestQueue.add(arrayRequest);
+    }
+
+    // Die Funktion gibt die Werte direkt in InputTextTimestampedLocation aus. String[][] besitzt die Daten auch, falls wir die woanders brauchen.
+    public String[][] datenVerarbeitenUndAusgeben(JSONArray response) throws JSONException {
+        String[] latitude, longitude, altitude, timestamp, track, session, counter;
+        latitude = new String[response.length()];
+        longitude = new String[response.length()];
+        altitude = new String[response.length()];
+        timestamp = new String[response.length()];
+        track = new String[response.length()];
+        session = new String[response.length()];
+        counter = new String[response.length()];
+
+        GPS.getInstance().textViewTimestampedLocations.setText("Timestamped Locations");
+
+        for(int i = 0; i < response.length(); i++){
+            String daten = response.getJSONObject(i).toString();
+            latitude[i] = daten.substring(daten.indexOf("latitude\":")+10, daten.indexOf(",\"longitude\":"));
+            longitude[i] = daten.substring(daten.indexOf("longitude\":")+11, daten.indexOf(",\"altitude\":"));
+            altitude[i] = daten.substring(daten.indexOf("altitude\":")+10, daten.indexOf(",\"timestamp\":"));
+            timestamp[i] = daten.substring(daten.indexOf("timestamp\":")+11, daten.indexOf(",\"track\":"));
+            track[i] = daten.substring(daten.indexOf("track\":")+8, daten.indexOf(",\"session\":")-1);
+            session[i] = daten.substring(daten.indexOf("session\":")+10, daten.indexOf(",\"counter\"")-1);
+            counter[i] = daten.substring(daten.indexOf("counter\":")+10, daten.indexOf("}")-1);
+
+            GPS.getInstance().textViewTimestampedLocations.append("\n\nLatitude: " + latitude[i] + "\nLongitude: " + longitude[i] + "\nAltitude: " + altitude[i]);
+        }
+        String datensatz[][] = new String[response.length()][7];
+
+        for(int i = 0; i < response.length(); i++){
+            datensatz[i][0] = latitude[i];
+            datensatz[i][1] = longitude[i];
+            datensatz[i][2] = altitude[i];
+            datensatz[i][3] = timestamp[i];
+            datensatz[i][4] = track[i];
+            datensatz[i][5] = session[i];
+            datensatz[i][6] = counter[i];
+        }
+        return datensatz;
     }
 
     public void postSession(String name, String beschreibung) {
