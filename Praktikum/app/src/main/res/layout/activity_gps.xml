@@ -42,6 +42,17 @@
         app:layout_constraintBottom_toBottomOf="@+id/textInputName"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputTrackid"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="8dp"
+        android:hint="TrackID"
+        android:inputType="text"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLaden"
+        app:layout_constraintTop_toBottomOf="@+id/textInputBeschreibung" />
+
     <Switch
         android:id="@+id/switchOnOff"
         android:layout_width="wrap_content"
@@ -162,6 +173,16 @@
         android:inputType="number|numberDecimal"
         android:text="1000"
         app:layout_constraintBottom_toBottomOf="@+id/textInputIntervall"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/buttonLaden"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="2dp"
+        android:text="Laden"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputTrackid"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

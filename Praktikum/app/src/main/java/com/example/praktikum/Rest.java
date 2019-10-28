@@ -13,12 +13,14 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.location.LocationRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.concurrent.TimeUnit;
 
 public class Rest {
 
@@ -49,6 +51,31 @@ public class Rest {
                     @Override
                     public void onErrorResponse(VolleyError error){
                         Log.e("getSession ERROR", error.toString());
+                    }
+                }
+        );
+        requestQueue.add(arrayRequest);
+    }
+
+    public void getData(){
+
+        String URL="http://pi-bo.dd-dns.de:8080/LM-Server/api/v2/data?teamid=25&trackid=106";
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+        JsonArrayRequest arrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                URL,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.e("getData", response.toString());
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        Log.e("getData ERROR", error.toString());
                     }
                 }
         );
@@ -117,9 +144,9 @@ public class Rest {
             jsonBody.put("latitude", latitude);
             jsonBody.put("longitude", longitude);
             jsonBody.put("altitude", altitude);
-            jsonBody.put("timestamp", 5123124);
+            jsonBody.put("timestamp", TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
             jsonBody.put("trackid", getTrackid());
-            jsonBody.put("session", "Low Power");
+            jsonBody.put("session", GPS.getInstance().spinnerGPSPriority.getSelectedItem().toString());
             jsonBody.put("counter", 1);
             final String requestBody = "["+jsonBody.toString()+"]";
             Log.e("Test", requestBody);

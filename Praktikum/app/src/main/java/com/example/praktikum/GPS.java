@@ -2,11 +2,14 @@ package com.example.praktikum;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -19,11 +22,12 @@ public class GPS extends AppCompatActivity {
 
     Switch switchOnOff, switchSessionSpeichern;
     TextView textViewGPSKoordinaten, textViewAdresse, textViewTimestampedLocations;
-    TextInputEditText textInputIntervall, textInputFastestIntervall, textInputName, textInputBeschreibung;
+    TextInputEditText textInputIntervall, textInputFastestIntervall, textInputName, textInputBeschreibung, textInputTrackid;
     Spinner spinnerGPSPriority;
     GPSTracker gpsTracker;
     Location location;
     Rest rest;
+    Button buttonLaden;
 
     boolean sessionSpeichern;
 
@@ -45,6 +49,7 @@ public class GPS extends AppCompatActivity {
         textInputIntervall = findViewById(R.id.textInputIntervall);
         textInputName = findViewById(R.id.textInputName);
         textInputBeschreibung = findViewById(R.id.textInputBeschreibung);
+        textInputTrackid = findViewById(R.id.textInputTrackid);
 
         textViewGPSKoordinaten = findViewById(R.id.textViewGPSKoordinaten);
         textViewAdresse = findViewById(R.id.textViewAdresse);
@@ -52,6 +57,8 @@ public class GPS extends AppCompatActivity {
         textViewTimestampedLocations.setMovementMethod(new ScrollingMovementMethod());
 
         spinnerGPSPriority = findViewById(R.id.spinnerGPSPriority);
+
+        buttonLaden = findViewById(R.id.buttonLaden);
 
         rest = new Rest(getApplicationContext());
         
@@ -88,13 +95,22 @@ public class GPS extends AppCompatActivity {
                 }
             }
         });
+
+        buttonLaden.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rest.getData();
+            }
+        });
     }
+
 
     public void konfigurationAktiv(boolean aktivDeaktiv){
         spinnerGPSPriority.setEnabled(aktivDeaktiv);
         switchSessionSpeichern.setEnabled(aktivDeaktiv);
         textInputIntervall.setEnabled(aktivDeaktiv);
         textInputFastestIntervall.setEnabled(aktivDeaktiv);
+        buttonLaden.setEnabled(aktivDeaktiv);
     }
 
     public int getGPSPriority(){
