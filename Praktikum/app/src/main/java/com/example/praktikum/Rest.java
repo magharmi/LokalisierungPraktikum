@@ -57,7 +57,7 @@ public class Rest {
 
     public void getData(){
 
-        String URL="http://pi-bo.dd-dns.de:8080/LM-Server/api/v2/data?teamid=25&trackid=106";
+        String URL="http://pi-bo.dd-dns.de:8080/LM-Server/api/v2/data?teamid=25&trackid="+GPS.getInstance().textInputTrackid.getText().toString();
 
         RequestQueue requestQueue = Volley.newRequestQueue(context.getApplicationContext());
         JsonArrayRequest arrayRequest = new JsonArrayRequest(
@@ -145,6 +145,7 @@ public class Rest {
                     trackid = Integer.parseInt(response);
                     Log.e("trackid", getTrackid()+"");
                     postTrackStarten = true;
+
                     Log.e("postTrackStarten", getPostTrackStarten()+"");
                 }
                     },
