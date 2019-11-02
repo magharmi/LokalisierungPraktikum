@@ -9,10 +9,10 @@
     <Switch
         android:id="@+id/switchSessionSpeichern"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="80dp"
         android:text="Session wird nicht gespeichert"
         app:layout_constraintBottom_toTopOf="@+id/textInputTrackid"
         app:layout_constraintEnd_toStartOf="@+id/spinnerGPSNetwork"
