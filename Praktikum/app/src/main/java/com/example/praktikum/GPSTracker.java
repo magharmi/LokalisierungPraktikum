@@ -45,14 +45,14 @@ public class GPSTracker implements LocationListener {
             return null;
         }
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean isGPSEnabled = locationManager.isProviderEnabled(GPS.getInstance().getGPSNetwork());
         if(isGPSEnabled){
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000,10,this);
-            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            locationManager.requestLocationUpdates(GPS.getInstance().getGPSNetwork(), 1000,10,this);
+            Location location = locationManager.getLastKnownLocation(GPS.getInstance().getGPSNetwork());
             return location;
         }
         else{
-            Toast.makeText(context,"Bitte GPS aktivieren", Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"Bitte GPS/WIFI aktivieren", Toast.LENGTH_LONG).show();
         }
         return null;
     }
