@@ -5,11 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<<<<<<< HEAD
-    <uses-permission android:name="android.permission.INTERNET" />
-=======
+
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
->>>>>>> 90e134f1122437423b13571603dd40cf1f82009e
+
 
     <application
         android:allowBackup="true"
@@ -19,16 +17,12 @@
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
         <activity
             android:name=".Netzwerkpositionierung.NetzwerkP_Activity"
             android:label="@string/title_activity_netzwerk_p_"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Accelerometer" />
-=======
         android:usesCleartextTraffic="true"
-        <activity android:name=".Accelerometer"></activity>
->>>>>>> 90e134f1122437423b13571603dd40cf1f82009e
         <activity android:name=".GPS" />
         <activity android:name=".Gyro" />
         <activity android:name=".MainActivity">
