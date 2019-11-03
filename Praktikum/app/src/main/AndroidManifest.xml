@@ -3,7 +3,7 @@
     package="com.example.praktikum">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,9 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Accelerometer"></activity>
+        <activity
+            android:name=".Netzwerkpositionierung.NetzwerkP_Activity"
+            android:label="@string/title_activity_netzwerk_p_"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Accelerometer" />
         <activity android:name=".GPS" />
-        <activity android:name=".Gyro"/>
+        <activity android:name=".Gyro" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
