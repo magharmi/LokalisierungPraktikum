@@ -8,24 +8,23 @@
 
     <Switch
         android:id="@+id/switchSessionSpeichern"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="215dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="80dp"
         android:text="Session wird nicht gespeichert"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@+id/textInputTrackid"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerGPSNetwork"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputName" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputName"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="19dp"
+        android:layout_marginTop="5dp"
         android:hint="Name"
         android:inputType="text"
         app:layout_constraintEnd_toStartOf="@+id/textInputBeschreibung"
@@ -35,7 +34,7 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputBeschreibung"
         android:layout_width="180dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:hint="Beschreibung"
         android:inputType="text"
@@ -45,14 +44,13 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputTrackid"
         android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="19dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:hint="TrackID"
         android:inputType="number"
         android:text="106"
-        app:layout_constraintEnd_toStartOf="@+id/buttonLaden"
-        app:layout_constraintTop_toBottomOf="@+id/textInputBeschreibung" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewTimestampedLocations"
+        app:layout_constraintEnd_toStartOf="@+id/buttonLaden" />
 
     <Switch
         android:id="@+id/switchOnOff"
@@ -81,9 +79,9 @@
     <TextView
         android:id="@+id/textViewUeberschriftKonfiguration"
         android:layout_width="wrap_content"
-        android:layout_height="19dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="309dp"
         android:text="Konfiguration"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,19 +91,30 @@
 
     <Spinner
         android:id="@+id/spinnerGPSPriority"
-        android:layout_width="225dp"
+        android:layout_width="250dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:entries="@array/spinner_GPSPriority"
         app:layout_constraintBottom_toBottomOf="@+id/textViewGPSPriority"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewGPSPriority" />
+
+    <Spinner
+        android:id="@+id/spinnerGPSNetwork"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginEnd="16dp"
+        android:entries="@array/spinner_GPSNetwork"
+        app:layout_constraintBottom_toBottomOf="@+id/switchSessionSpeichern"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/switchSessionSpeichern" />
 
     <TextView
         android:id="@+id/textViewGPSPriority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="72dp"
         android:text="GPS-Priorität"
         app:layout_constraintEnd_toStartOf="@+id/spinnerGPSPriority"
@@ -118,7 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:text="Adresse:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewGPSKoordinaten" />
@@ -129,7 +138,7 @@
         android:layout_height="88dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="37dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="5dp"
         android:text="aktuelle Koordinaten\n\nLatitude:\nLongitude:\nAltitude:"
         app:layout_constraintBottom_toTopOf="@+id/textViewAdresse"
         app:layout_constraintStart_toStartOf="parent"
@@ -150,11 +159,10 @@
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputIntervall"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="19dp"
+        android:layout_marginTop="5dp"
         android:hint="Intervall"
         android:inputType="number"
         android:text="2000"
@@ -165,9 +173,8 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputFastestIntervall"
         android:layout_width="180dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="1dp"
         android:hint="FastestIntervall"
         android:inputType="number|numberDecimal"
         android:text="1000"
@@ -179,7 +186,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="2dp"
         android:text="Laden"
         app:layout_constraintBottom_toBottomOf="@+id/textInputTrackid"
         app:layout_constraintEnd_toEndOf="parent" />
