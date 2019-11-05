@@ -24,6 +24,7 @@ public class Rest {
 
     static int trackid;
     static boolean postTrackStarten;
+    String datensatz[][];
 
     Context context;
     public Rest(Context c){
@@ -70,7 +71,7 @@ public class Rest {
                         Log.e("getData", response.toString());
                         GPS.getInstance().textViewTimestampedLocations.setText(response.toString());
                         try {
-                            datenVerarbeitenUndAusgeben(response);
+                            datenVerarbeitenUndAusgeben(response, true);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -87,7 +88,7 @@ public class Rest {
     }
 
     // Die Funktion gibt die Werte direkt in InputTextTimestampedLocation aus. String[][] besitzt die Daten auch, falls wir die woanders brauchen.
-    public String[][] datenVerarbeitenUndAusgeben(JSONArray response) throws JSONException {
+    public String[][] datenVerarbeitenUndAusgeben(JSONArray response, boolean ausgeben) throws JSONException {
         String[] latitude, longitude, altitude, timestamp, track, session, counter;
         latitude = new String[response.length()];
         longitude = new String[response.length()];
@@ -109,9 +110,11 @@ public class Rest {
             session[i] = daten.substring(daten.indexOf("session\":")+10, daten.indexOf(",\"counter\"")-1);
             counter[i] = daten.substring(daten.indexOf("counter\":")+10, daten.indexOf("}")-1);
 
-            GPS.getInstance().textViewTimestampedLocations.append("\n\nLatitude: " + latitude[i] + "\nLongitude: " + longitude[i] + "\nAltitude: " + altitude[i]);
+            if(ausgeben == true) {
+                GPS.getInstance().textViewTimestampedLocations.append("\n\nLatitude: " + latitude[i] + "\nLongitude: " + longitude[i] + "\nAltitude: " + altitude[i]);
+            }
         }
-        String datensatz[][] = new String[response.length()][7];
+        datensatz = new String[response.length()][7];
 
         for(int i = 0; i < response.length(); i++){
             datensatz[i][0] = latitude[i];
