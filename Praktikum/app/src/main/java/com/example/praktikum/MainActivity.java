@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.example.praktikum.Netzwerkpositionierung.NetzwerkP_Activity;
-
 public class MainActivity extends AppCompatActivity {
 
     Button buttonWeiter;
@@ -35,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if(spinnerDatenquellen.getSelectedItem().toString().equals("Gyro")){
                     startActivity(new Intent(MainActivity.this, Gyro.class));
-                }else if(spinnerDatenquellen.getSelectedItem().toString().equals("Netzwerkpositionierung")){
-                    startActivity(new Intent(MainActivity.this, NetzwerkP_Activity.class));
                 }
             }
         });
