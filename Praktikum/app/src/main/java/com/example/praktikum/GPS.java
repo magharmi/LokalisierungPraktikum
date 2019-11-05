@@ -112,8 +112,8 @@ public class GPS extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(GPS.this, MapsActivity.class);
                 String datensatz[][] = rest.datensatz;
-                double[] latitude = new double[5];
-                double[] longitude = new double[5];
+                double[] latitude = new double[datensatz.length];
+                double[] longitude = new double[datensatz.length];
                 for(int i = 0; i < datensatz.length; i++) {
                     latitude[i] = Double.parseDouble(datensatz[i][0]);
                     longitude[i] = Double.parseDouble(datensatz[i][1]);
