@@ -190,4 +190,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/textInputTrackid"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <Button
+        android:id="@+id/buttonMaps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Karte"
+        app:layout_constraintBottom_toBottomOf="@+id/switchOnOff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/switchOnOff"
+        app:layout_constraintTop_toTopOf="@+id/switchOnOff" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

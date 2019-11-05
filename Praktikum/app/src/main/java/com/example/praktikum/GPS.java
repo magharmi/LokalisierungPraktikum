@@ -28,7 +28,7 @@ public class GPS extends AppCompatActivity {
     GPSTracker gpsTracker;
     Location location;
     Rest rest;
-    Button buttonLaden;
+    Button buttonLaden, buttonMaps;
 
     boolean sessionSpeichern;
 
@@ -61,9 +61,10 @@ public class GPS extends AppCompatActivity {
         spinnerGPSNetwork = findViewById(R.id.spinnerGPSNetwork);
 
         buttonLaden = findViewById(R.id.buttonLaden);
+        buttonMaps = findViewById(R.id.buttonMaps);
 
         rest = new Rest(getApplicationContext());
-        
+
 
         switchOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -71,7 +72,7 @@ public class GPS extends AppCompatActivity {
                 if (isChecked == true) {
                     switchOnOff.setText("Datensammlung aktiviert");
                     konfigurationAktiv(false);
-                    if(sessionSpeichern == true) {
+                    if (sessionSpeichern == true) {
                         rest.postSession(textInputName.getText().toString(), textInputBeschreibung.getText().toString());
                     }
                     gpsTracker = new GPSTracker(getApplicationContext());
@@ -89,11 +90,10 @@ public class GPS extends AppCompatActivity {
         switchSessionSpeichern.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked == true){
+                if (isChecked == true) {
                     switchSessionSpeichern.setText("Session wird gespeichert");
                     sessionSpeichern = true;
-                }
-                else{
+                } else {
                     switchSessionSpeichern.setText("Session wird nicht gespeichert");
                     sessionSpeichern = false;
                 }
@@ -104,6 +104,16 @@ public class GPS extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 rest.getData();
+            }
+        });
+
+        buttonMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(GPS.this, MapsActivity.class);
+                intent.putExtra("Latitude", location.getLatitude());
+                intent.putExtra("Longitude", location.getLongitude());
+                startActivity(intent);
             }
         });
     }
