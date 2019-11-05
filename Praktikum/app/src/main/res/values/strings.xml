@@ -21,11 +21,6 @@
         <item>No Power</item>
     </string-array>
 
-    <string-array name="spinner_GPSNetwork">
-        <item>GPS</item>
-        <item>Netzwerkpositionierung</item>
-    </string-array>
-
     <string-array name="values_GPSPriority">
         <item>102</item>
         <item>100</item>

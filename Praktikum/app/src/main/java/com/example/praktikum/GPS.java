@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -24,7 +23,7 @@ public class GPS extends AppCompatActivity {
     Switch switchOnOff, switchSessionSpeichern;
     TextView textViewGPSKoordinaten, textViewAdresse, textViewTimestampedLocations;
     TextInputEditText textInputIntervall, textInputFastestIntervall, textInputName, textInputBeschreibung, textInputTrackid;
-    Spinner spinnerGPSPriority, spinnerGPSNetwork;
+    Spinner spinnerGPSPriority;
     GPSTracker gpsTracker;
     Location location;
     Rest rest;
@@ -58,7 +57,6 @@ public class GPS extends AppCompatActivity {
         textViewTimestampedLocations.setMovementMethod(new ScrollingMovementMethod());
 
         spinnerGPSPriority = findViewById(R.id.spinnerGPSPriority);
-        spinnerGPSNetwork = findViewById(R.id.spinnerGPSNetwork);
 
         buttonLaden = findViewById(R.id.buttonLaden);
 
@@ -71,9 +69,7 @@ public class GPS extends AppCompatActivity {
                 if (isChecked == true) {
                     switchOnOff.setText("Datensammlung aktiviert");
                     konfigurationAktiv(false);
-                    if(sessionSpeichern == true) {
-                        rest.postSession(textInputName.getText().toString(), textInputBeschreibung.getText().toString());
-                    }
+                    rest.postSession(textInputName.getText().toString(), textInputBeschreibung.getText().toString());
                     gpsTracker = new GPSTracker(getApplicationContext());
                     gpsTracker.setLocationRequest(getGPSPriority(), Integer.parseInt(textInputIntervall.getText().toString()), Integer.parseInt(textInputFastestIntervall.getText().toString()));
                     //Log.e("GPSPriority", getGPSPriority()+"");
@@ -116,23 +112,12 @@ public class GPS extends AppCompatActivity {
         textInputFastestIntervall.setEnabled(aktivDeaktiv);
         buttonLaden.setEnabled(aktivDeaktiv);
         textInputTrackid.setEnabled(aktivDeaktiv);
-        spinnerGPSNetwork.setEnabled(aktivDeaktiv);
     }
 
     public int getGPSPriority(){
         int position = spinnerGPSPriority.getSelectedItemPosition();
         String[] values_GPSPriority = getResources().getStringArray(R.array.values_GPSPriority);
         return Integer.parseInt(values_GPSPriority[position]);
-    }
-
-    public String getGPSNetwork(){
-        if(spinnerGPSNetwork.getSelectedItem().toString().equals("GPS")){
-            return LocationManager.GPS_PROVIDER;
-        }
-        else if(spinnerGPSNetwork.getSelectedItem().toString().equals("Netzwerkpositionierung")){
-            return LocationManager.NETWORK_PROVIDER;
-        }
-        else return null;
     }
 
     public static GPS getInstance(){
