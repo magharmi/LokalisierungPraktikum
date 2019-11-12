@@ -24,6 +24,7 @@ public class Rest {
 
     static int trackid;
     static boolean postTrackStarten;
+    static int counter = 0;
     String datensatz[][];
 
     Context context;
@@ -184,6 +185,8 @@ public class Rest {
 
     public void postData(double latitude, double longitude, double altitude) {
 
+        counter++;
+
         String URL = "http://pi-bo.dd-dns.de:8080/LM-Server/api/v2/data";
         try {
             JSONObject jsonBody = new JSONObject();
@@ -194,7 +197,7 @@ public class Rest {
             jsonBody.put("timestamp", TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
             jsonBody.put("trackid", getTrackid());
             jsonBody.put("session", GPS.getInstance().spinnerGPSPriority.getSelectedItem().toString());
-            jsonBody.put("counter", 1);
+            jsonBody.put("counter", counter);
             final String requestBody = "["+jsonBody.toString()+"]";
             Log.e("Test", requestBody);
 
@@ -241,6 +244,10 @@ public class Rest {
 
     public boolean getPostTrackStarten(){
         return postTrackStarten;
+    }
+
+    public void resetCounter(){
+        counter = 0;
     }
 
 }

@@ -74,6 +74,7 @@ public class GPS extends AppCompatActivity {
                     konfigurationAktiv(false);
                     if (sessionSpeichern == true) {
                         rest.postSession(textInputName.getText().toString(), textInputBeschreibung.getText().toString());
+                        rest.resetCounter();
                     }
                     gpsTracker = new GPSTracker(getApplicationContext());
                     gpsTracker.setLocationRequest(getGPSPriority(), Integer.parseInt(textInputIntervall.getText().toString()), Integer.parseInt(textInputFastestIntervall.getText().toString()));
