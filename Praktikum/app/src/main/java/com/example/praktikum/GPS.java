@@ -17,7 +17,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.List;
 
 public class GPS extends AppCompatActivity {
 
@@ -84,6 +87,21 @@ public class GPS extends AppCompatActivity {
                     switchOnOff.setText("Datensammlung deaktiviert");
                     konfigurationAktiv(true);
                     gpsTracker.datensammlungAktiv = false;
+
+                    Interpolation interpolation = new Interpolation();
+
+                    Location a = new Location("A");
+                    Location b = new Location("B");
+                    a.setLatitude(51.52823);
+                    a.setLongitude(7.35489);
+                    b.setLatitude(51.52886);
+                    b.setLongitude(7.35399);
+                    List<Location> interpolierenListe =  interpolation.koordinatenLinearInterpolieren(a, b, 5000, 30000);
+
+                    for(int i = 0; i < interpolierenListe.size(); i++){
+                        Log.e(i + "", interpolierenListe.get(i).getLatitude() + "");
+                        Log.e(i + "", interpolierenListe.get(i).getLongitude() + "");
+                    }
                 }
             }
         });
