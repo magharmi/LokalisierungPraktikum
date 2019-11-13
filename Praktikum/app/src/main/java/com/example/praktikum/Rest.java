@@ -1,6 +1,7 @@
 package com.example.praktikum;
 
 import android.content.Context;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -18,6 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class Rest {
@@ -112,7 +115,7 @@ public class Rest {
             counter[i] = daten.substring(daten.indexOf("counter\":")+10, daten.indexOf("}")-1);
 
             if(ausgeben == true) {
-                GPS.getInstance().textViewTimestampedLocations.append("\n\nLatitude: " + latitude[i] + "\nLongitude: " + longitude[i] + "\nAltitude: " + altitude[i]);
+                GPS.getInstance().textViewTimestampedLocations.append("\n\nLatitude: " + latitude[i] + "\nLongitude: " + longitude[i] + "\nAltitude: " + altitude[i] + "\nTimestamp: " + getDate(Long.parseLong(timestamp[i])));
             }
         }
         datensatz = new String[response.length()][7];
@@ -127,6 +130,13 @@ public class Rest {
             datensatz[i][6] = counter[i];
         }
         return datensatz;
+    }
+
+    private String getDate(long timestamp) {
+        Calendar cal = Calendar.getInstance(Locale.GERMANY);
+        cal.setTimeInMillis(timestamp * 1000);
+        String date = DateFormat.format("dd.mm.yyyy hh:mm:ss", cal).toString();
+        return date;
     }
 
     public void postSession(String name, String beschreibung) {
@@ -147,7 +157,7 @@ public class Rest {
                     response = response.substring(response.indexOf(":") + 1);
                     response = response.substring(0, response.indexOf(","));
                     trackid = Integer.parseInt(response);
-                    Log.e("trackid", getTrackid()+"");
+                    GPS.getInstance().textInputTrackid.setText(getTrackid()+"");
                     postTrackStarten = true;
 
                     Log.e("postTrackStarten", getPostTrackStarten()+"");
