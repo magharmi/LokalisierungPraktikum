@@ -132,10 +132,10 @@ public class Rest {
         return datensatz;
     }
 
-    private String getDate(long timestamp) {
+    public String getDate(long timestamp) {
         Calendar cal = Calendar.getInstance(Locale.GERMANY);
         cal.setTimeInMillis(timestamp * 1000);
-        String date = DateFormat.format("dd.mm.yyyy hh:mm:ss", cal).toString();
+        String date = DateFormat.format("dd.MM.yyyy HH:mm:ss", cal).toString();
         return date;
     }
 

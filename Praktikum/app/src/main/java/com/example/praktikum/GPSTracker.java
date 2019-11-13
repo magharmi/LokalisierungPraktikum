@@ -26,6 +26,7 @@ import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class GPSTracker implements LocationListener {
     LocationRequest locationRequest;
@@ -76,6 +77,7 @@ public class GPSTracker implements LocationListener {
         locationRequest.setPriority(priority);
         locationRequest.setInterval(interval);
         locationRequest.setFastestInterval(fastestInterval);
+        locationRequest.setSmallestDisplacement(1);
 
         Log.e("LocationRequest", "Interval: " + locationRequest.getInterval() + " FastestIntervall " + locationRequest.getFastestInterval());
     }
@@ -96,8 +98,8 @@ public class GPSTracker implements LocationListener {
     public void onLocationChanged(Location location) {
         if(location != null && datensammlungAktiv == true) {
             Rest rest = new Rest(context);
-            GPS.getInstance().textViewGPSKoordinaten.setText("aktuelle Koordinaten\n\nLatitude: "+location.getLatitude()+"\nLongitude: "+location.getLongitude()+"\nAltitude: "+location.getAltitude());
-            GPS.getInstance().textViewTimestampedLocations.append("\n\nLatitude: "+location.getLatitude()+"\nLongitude: "+location.getLongitude()+"\nAltitude: "+location.getAltitude());
+            GPS.getInstance().textViewGPSKoordinaten.setText("aktuelle Koordinaten von " + rest.getDate(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())) + "\n\nLatitude: "+location.getLatitude()+"\nLongitude: "+location.getLongitude()+"\nAltitude: "+location.getAltitude());
+            GPS.getInstance().textViewTimestampedLocations.append("\n\nLatitude: "+location.getLatitude()+"\nLongitude: "+location.getLongitude()+"\nAltitude: "+location.getAltitude()+"\nTimestamp: "+rest.getDate(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())));
             if(rest.getPostTrackStarten() == true) {
                 rest.postData(location.getLatitude(), location.getLongitude(), location.getAltitude());
             }
