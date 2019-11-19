@@ -11,8 +11,8 @@ import java.util.List;
 
 public class Interpolation {
 
-    public List<Location> koordinatenLinearInterpolieren(Location a, Location b, long t1, long t2){
-        List<Location> listeInterpolierteKoordinaten = new ArrayList<>();
+    public ArrayList<Location> koordinatenLinearInterpolieren(Location a, Location b, long t1, long t2){
+        ArrayList<Location> listeInterpolierteKoordinaten = new ArrayList<>();
         double dLongitude = b.getLongitude() - a.getLongitude();
         double dLatitude = b.getLatitude() - a.getLatitude();
         int schrittweiteInMillisekunden = 1000;

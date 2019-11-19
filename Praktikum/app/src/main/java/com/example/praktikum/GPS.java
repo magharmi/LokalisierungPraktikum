@@ -20,6 +20,9 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.lang.reflect.Array;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GPS extends AppCompatActivity {
@@ -88,20 +91,6 @@ public class GPS extends AppCompatActivity {
                     konfigurationAktiv(true);
                     gpsTracker.datensammlungAktiv = false;
 
-                    Interpolation interpolation = new Interpolation();
-
-                    Location a = new Location("A");
-                    Location b = new Location("B");
-                    a.setLatitude(51.52823);
-                    a.setLongitude(7.35489);
-                    b.setLatitude(51.52886);
-                    b.setLongitude(7.35399);
-                    List<Location> interpolierenListe =  interpolation.koordinatenLinearInterpolieren(a, b, 5000, 30000);
-
-                    for(int i = 0; i < interpolierenListe.size(); i++){
-                        Log.e(i + "", interpolierenListe.get(i).getLatitude() + "");
-                        Log.e(i + "", interpolierenListe.get(i).getLongitude() + "");
-                    }
                 }
             }
         });
@@ -131,14 +120,34 @@ public class GPS extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(GPS.this, MapsActivity.class);
                 String datensatz[][] = rest.datensatz;
+                Location start = new Location("Start");
+                Location ende = new Location("Ende");
+                Interpolation interpolation = new Interpolation();
+                String t1, t2;
                 double[] latitude = new double[datensatz.length];
                 double[] longitude = new double[datensatz.length];
                 for(int i = 0; i < datensatz.length; i++) {
                     latitude[i] = Double.parseDouble(datensatz[i][0]);
                     longitude[i] = Double.parseDouble(datensatz[i][1]);
                 }
+                start.setLatitude(latitude[0]);
+                start.setLongitude(longitude[0]);
+                ende.setLatitude(latitude[latitude.length-1]);
+                ende.setLongitude(longitude[longitude.length-1]);
+                t1 = datensatz[0][3];
+                t2 = datensatz[datensatz.length-1][3];
+                Log.e("t1", t1+"");
+                Log.e("t2", t2+"");
+                ArrayList<Location> interpolationListe =  interpolation.koordinatenLinearInterpolieren(start, ende, Long.parseLong(t1), Long.parseLong(t2));
                 intent.putExtra("Latitude", latitude);
                 intent.putExtra("Longitude", longitude);
+                intent.putExtra("InterpolationListe", interpolationListe);
+
+                for(int i = 0; i < interpolationListe.size(); i++){
+                    Log.e("Latitude", interpolationListe.get(i).getLatitude()+"");
+                    Log.e("Longitude", interpolationListe.get(i).getLongitude()+"");
+                }
+
                 startActivity(intent);
             }
         });
