@@ -1,6 +1,7 @@
 package com.example.praktikum;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.location.Location;
@@ -47,6 +48,7 @@ public class GPS extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         gps = this;
+        gpsTracker = new GPSTracker(getApplicationContext());
 
         //Initialisierung
         switchOnOff = findViewById(R.id.switchOnOff);
@@ -82,15 +84,14 @@ public class GPS extends AppCompatActivity {
                         rest.postSession(textInputName.getText().toString(), textInputBeschreibung.getText().toString());
                         rest.resetCounter();
                     }
-                    gpsTracker = new GPSTracker(getApplicationContext());
                     gpsTracker.setLocationRequest(getGPSPriority(), Integer.parseInt(textInputIntervall.getText().toString()), Integer.parseInt(textInputFastestIntervall.getText().toString()));
-                    //Log.e("GPSPriority", getGPSPriority()+"");
                     location = gpsTracker.getLocation();
+                    startService();
                 } else {
                     switchOnOff.setText("Datensammlung deaktiviert");
                     konfigurationAktiv(true);
                     gpsTracker.datensammlungAktiv = false;
-
+                    stopService();
                 }
             }
         });
@@ -178,6 +179,20 @@ public class GPS extends AppCompatActivity {
             return LocationManager.NETWORK_PROVIDER;
         }
         else return null;
+    }
+
+    public void startService(){
+        Intent intent = new Intent(this, GPSService.class);
+        ContextCompat.startForegroundService(this, intent);
+    }
+
+    public void stopService(){
+        Intent intent = new Intent(this, GPSService.class);
+        stopService(intent);
+    }
+
+    public void setLocation(){
+        location = gpsTracker.getLocation();
     }
 
     public static GPS getInstance(){
