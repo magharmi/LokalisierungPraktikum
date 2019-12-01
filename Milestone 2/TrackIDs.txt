@@ -1,0 +1,4 @@
+216 High
+207 Balanced
+220 Low
+222 No
