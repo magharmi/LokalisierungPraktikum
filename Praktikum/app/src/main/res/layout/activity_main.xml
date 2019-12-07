@@ -32,4 +32,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerDatenquellen" />
 
+    <com.jjoe64.graphview.GraphView
+        android:layout_width="368dp"
+        android:layout_height="200dp"
+        android:id="@+id/graph"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
