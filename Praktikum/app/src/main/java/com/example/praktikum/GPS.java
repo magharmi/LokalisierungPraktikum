@@ -24,23 +24,18 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.lang.reflect.Array;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class GPS extends AppCompatActivity {
 
     Switch switchOnOff, switchSessionSpeichern;
-    TextView textViewGPSKoordinaten, textViewAdresse, textViewTimestampedLocations,testView;
+    TextView textViewGPSKoordinaten, textViewAdresse, textViewTimestampedLocations;
     TextInputEditText textInputIntervall, textInputFastestIntervall, textInputName, textInputBeschreibung, textInputTrackid;
     Spinner spinnerGPSPriority, spinnerGPSNetwork;
     GPSTracker gpsTracker;
     Location location;
     Rest rest;
     Button buttonLaden, buttonMaps,buttonTime;
-
-    Date zeitstempel;
-    String testzeit;
 
     boolean sessionSpeichern;
 
@@ -69,7 +64,6 @@ public class GPS extends AppCompatActivity {
         textViewAdresse = findViewById(R.id.textViewAdresse);
         textViewTimestampedLocations = findViewById(R.id.textViewTimestampedLocations);
         textViewTimestampedLocations.setMovementMethod(new ScrollingMovementMethod());
-        testView.findViewById(R.id.testview);
 
         spinnerGPSPriority = findViewById(R.id.spinnerGPSPriority);
         spinnerGPSNetwork = findViewById(R.id.spinnerGPSNetwork);
@@ -117,16 +111,6 @@ public class GPS extends AppCompatActivity {
             }
         });
 
-
-        buttonTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                zeitstempel = Calendar.getInstance().getTime();
-            }
-        });
-
-
         buttonLaden.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,7 +155,6 @@ public class GPS extends AppCompatActivity {
             }
         });
     }
-
 
 
     public void konfigurationAktiv(boolean aktivDeaktiv){
