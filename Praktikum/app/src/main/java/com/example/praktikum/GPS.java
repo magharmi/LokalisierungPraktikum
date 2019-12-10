@@ -35,7 +35,7 @@ public class GPS extends AppCompatActivity {
     GPSTracker gpsTracker;
     Location location;
     Rest rest;
-    Button buttonLaden, buttonMaps;
+    Button buttonLaden, buttonMaps,buttonTime;
 
     boolean sessionSpeichern;
 
@@ -70,6 +70,8 @@ public class GPS extends AppCompatActivity {
 
         buttonLaden = findViewById(R.id.buttonLaden);
         buttonMaps = findViewById(R.id.buttonMaps);
+        buttonTime = findViewById(R.id.time);
+
 
         rest = new Rest(getApplicationContext());
 
