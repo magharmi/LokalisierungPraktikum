@@ -2,3 +2,8 @@
 207 Balanced
 220 Low
 222 No
+
+Outdoor
+233 High
+226 Balanced
+234 GPS

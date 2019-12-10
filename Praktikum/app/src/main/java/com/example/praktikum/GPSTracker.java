@@ -51,7 +51,7 @@ public class GPSTracker implements LocationListener {
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         boolean isGPSEnabled = locationManager.isProviderEnabled(GPS.getInstance().getGPSNetwork());
         if(isGPSEnabled){
-            //locationManager.requestLocationUpdates(GPS.getInstance().getGPSNetwork(), 1000,10,this);  // GPS und Netzwerk auswählbar. Bei FusedLocationProviderClient nicht
+            locationManager.requestLocationUpdates(GPS.getInstance().getGPSNetwork(), 1000,10,this);  // GPS und Netzwerk auswählbar. Bei FusedLocationProviderClient nicht
             Location location = locationManager.getLastKnownLocation(GPS.getInstance().getGPSNetwork());
             FusedLocationProviderClient fusedLocationProviderClient = new FusedLocationProviderClient(context);
             fusedLocationProviderClient.requestLocationUpdates(locationRequest, new LocationCallback(){
