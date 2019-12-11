@@ -31,6 +31,11 @@ public class Interpolation {
             t = t + schrittweiteInMillisekunden;
         }
 
+        for(int i = 0; i < listeInterpolierteKoordinaten.size(); i++){
+            Log.e("Interpolation Latitude:", listeInterpolierteKoordinaten.get(i).getLatitude()+"");
+            Log.e("Interpolation Longitu:", listeInterpolierteKoordinaten.get(i).getLongitude()+"");
+        }
+
         return listeInterpolierteKoordinaten;
     }
 

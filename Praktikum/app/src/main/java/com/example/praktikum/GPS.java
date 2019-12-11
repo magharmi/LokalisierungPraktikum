@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Debug;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +36,7 @@ public class GPS extends AppCompatActivity {
     GPSTracker gpsTracker;
     Location location;
     Rest rest;
-    Button buttonLaden, buttonMaps;
+    Button buttonLaden, buttonMaps, buttonTimestamp;
 
     boolean sessionSpeichern;
 
@@ -49,6 +50,7 @@ public class GPS extends AppCompatActivity {
 
         gps = this;
         gpsTracker = new GPSTracker(getApplicationContext());
+
 
         //Initialisierung
         switchOnOff = findViewById(R.id.switchOnOff);
@@ -70,6 +72,7 @@ public class GPS extends AppCompatActivity {
 
         buttonLaden = findViewById(R.id.buttonLaden);
         buttonMaps = findViewById(R.id.buttonMaps);
+        buttonTimestamp = findViewById(R.id.buttonTimestamp);
 
         rest = new Rest(getApplicationContext());
 
@@ -116,6 +119,13 @@ public class GPS extends AppCompatActivity {
             }
         });
 
+        buttonTimestamp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                route1();
+            }
+        });
+
         buttonMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -152,6 +162,45 @@ public class GPS extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void route1(){
+        long timestampIndoor1 = 1574767742;
+        long timestampIndoor2 = 1574767764;
+        long timestampIndoor3 = 1574767894;
+        long timestampIndoor4 = 1574768010;
+        long timestampIndoor5 = 1574768059;
+
+        ArrayList<ArrayList<Location>> arrayListOutdoorLocation = new ArrayList<>();
+        Interpolation interpolation = new Interpolation();
+        Location realLocation = new Location(getGPSNetwork());
+        Location gpsLocation = new Location(getGPSNetwork());
+
+        realLocation.setLatitude(51.44585);
+        realLocation.setLongitude(7.27273);
+        gpsLocation.setLatitude(51.44584);
+        gpsLocation.setLongitude(7.27275);
+        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation, gpsLocation, timestampIndoor1, 1574767742));
+        realLocation.setLatitude(51.44653);
+        realLocation.setLongitude(7.27193);
+        gpsLocation.setLatitude(51.44624);
+        gpsLocation.setLongitude(7.27210);
+        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation, gpsLocation, timestampIndoor2, 1574767764));
+        realLocation.setLatitude(51.44702);
+        realLocation.setLongitude(7.27169);
+        gpsLocation.setLatitude(51.44723);
+        gpsLocation.setLongitude(7.27126);
+        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation, gpsLocation, timestampIndoor3, 1574767894));
+        realLocation.setLatitude(51.44779);
+        realLocation.setLongitude(7.27072);
+        gpsLocation.setLatitude(51.44795);
+        gpsLocation.setLongitude(7.27065);
+        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation, gpsLocation, timestampIndoor4, 1574768010));
+        realLocation.setLatitude(51.44740);
+        realLocation.setLongitude(7.27025);
+        gpsLocation.setLatitude(51.44761);
+        gpsLocation.setLongitude(7.26960);
+        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation, gpsLocation, timestampIndoor5, 1574768059));
     }
 
 
