@@ -201,6 +201,10 @@ public class GPS extends AppCompatActivity {
         gpsLocation.setLatitude(51.44761);
         gpsLocation.setLongitude(7.26960);
         arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation, gpsLocation, timestampIndoor5, 1574768059));
+
+        for(int i = 0; i < arrayListOutdoorLocation.size(); i++) {
+            Log.e("Liste", arrayListOutdoorLocation.get(0).get(0).getLongitude() + "");     //FEHLER IST HIER!
+        }
     }
 
 
