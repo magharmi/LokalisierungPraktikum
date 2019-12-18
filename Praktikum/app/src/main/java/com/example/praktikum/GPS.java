@@ -165,29 +165,32 @@ public class GPS extends AppCompatActivity {
     }
 
     public void route1(){
-        long timestampIndoor1 = 1574767742;
-        long timestampIndoor2 = 1574767764;
+        long timestampIndoorA = 1574767658; // Startpunkt
+        long timestampIndoorB = 1574767742; // B
+        long timestampIndoorC = 1574771413; // C alter Wert: 1574767764
         long timestampIndoor3 = 1574767894;
         long timestampIndoor4 = 1574768010;
         long timestampIndoor5 = 1574768059;
 
         ArrayList<ArrayList<Location>> arrayListOutdoorLocation = new ArrayList<>();
         Interpolation interpolation = new Interpolation();
-        Location realLocation = new Location(getGPSNetwork());
+        Location realLocation1 = new Location(getGPSNetwork());
+        Location realLocation2 = new Location(getGPSNetwork());
         Location gpsLocation = new Location(getGPSNetwork());
 
-        realLocation.setLatitude(51.44585);
-        realLocation.setLongitude(7.27273);
-        gpsLocation.setLatitude(51.44584);
-        gpsLocation.setLongitude(7.27275);
-        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation, gpsLocation, timestampIndoor1, 1574767742));
-        realLocation.setLatitude(51.44653);
-        realLocation.setLongitude(7.27193);
-        gpsLocation.setLatitude(51.44624);
-        gpsLocation.setLongitude(7.27210);
-        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation, gpsLocation, timestampIndoor2, 1574767764));
-        realLocation.setLatitude(51.44702);
-        realLocation.setLongitude(7.27169);
+        realLocation1.setLatitude(51.44585);
+        realLocation1.setLongitude(7.27273);
+        realLocation2.setLatitude(51.44653);
+        realLocation2.setLongitude(7.27193);
+        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation1, realLocation2, timestampIndoorA, timestampIndoorB));
+        realLocation1.setLatitude(51.44653);
+        realLocation1.setLongitude(7.27193);
+        realLocation2.setLatitude(51.44702);
+        realLocation2.setLongitude(7.27169);
+        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation1, realLocation2, timestampIndoorB, timestampIndoorC));
+        /*
+        realLocation1.setLatitude(51.44702);
+        realLocation1.setLongitude(7.27169);
         gpsLocation.setLatitude(51.44723);
         gpsLocation.setLongitude(7.27126);
         arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation, gpsLocation, timestampIndoor3, 1574767894));
@@ -201,12 +204,14 @@ public class GPS extends AppCompatActivity {
         gpsLocation.setLatitude(51.44761);
         gpsLocation.setLongitude(7.26960);
         arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation, gpsLocation, timestampIndoor5, 1574768059));
+         */
 
+        Log.e("Size", arrayListOutdoorLocation.size()+"");
+        Log.e("Test", arrayListOutdoorLocation.get(0).size()+"");
         for(int i = 0; i < arrayListOutdoorLocation.size(); i++) {
-            Log.e("Liste", arrayListOutdoorLocation.get(0).get(0).getLongitude() + "");     //FEHLER IST HIER!
+            Log.e("Liste", arrayListOutdoorLocation.get(0).get(0).getLongitude() + "");
         }
     }
-
 
     public void konfigurationAktiv(boolean aktivDeaktiv){
         spinnerGPSPriority.setEnabled(aktivDeaktiv);
