@@ -12,7 +12,7 @@ public class Interpolation {
         ArrayList<Location> listeInterpolierteKoordinaten = new ArrayList<>();
         double dLongitude = b.getLongitude() - a.getLongitude();
         double dLatitude = b.getLatitude() - a.getLatitude();
-        int schrittweiteInMillisekunden = 1000;
+        int schrittweiteInMillisekunden = 10;
 
         long t21 = t2 - t1;
         long t = t1 + schrittweiteInMillisekunden;

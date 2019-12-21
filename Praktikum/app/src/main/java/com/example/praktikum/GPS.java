@@ -131,34 +131,29 @@ public class GPS extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(GPS.this, MapsActivity.class);
                 String datensatz[][] = rest.datensatz;
+                ArrayList<Location> gbsData = parseIntoLocationList(datensatz);
                 Location start = new Location("Start");
+                Location middle = new Location("middle");
                 Location ende = new Location("Ende");
                 Interpolation interpolation = new Interpolation();
-                String t1, t2;
-                double[] latitude = new double[datensatz.length];
-                double[] longitude = new double[datensatz.length];
-                for(int i = 0; i < datensatz.length; i++) {
-                    latitude[i] = Double.parseDouble(datensatz[i][0]);
-                    longitude[i] = Double.parseDouble(datensatz[i][1]);
-                }
-                start.setLatitude(latitude[0]);
-                start.setLongitude(longitude[0]);
-                ende.setLatitude(latitude[latitude.length-1]);
-                ende.setLongitude(longitude[longitude.length-1]);
-                t1 = datensatz[0][3];
-                t2 = datensatz[datensatz.length-1][3];
+                Long t1, t2;
+                start.setLatitude(51.44609);
+                start.setLongitude(7.27231);
+                middle.setLatitude(51.44794);
+                middle.setLongitude(7.27066);
+                ende.setLatitude(51.4478);
+                ende.setLongitude(7.27024);
+                t1 = gbsData.get(0).getTime();
+                t2 = gbsData.get(gbsData.size()-1).getTime();
+                long t12 = t2 - 100;
                 Log.e("t1", t1+"");
                 Log.e("t2", t2+"");
-                ArrayList<Location> interpolationListe =  interpolation.koordinatenLinearInterpolieren(start, ende, Long.parseLong(t1), Long.parseLong(t2));
-                intent.putExtra("Latitude", latitude);
-                intent.putExtra("Longitude", longitude);
-                intent.putExtra("InterpolationListe", interpolationListe);
+                ArrayList<Location> interpolationListeSM =  interpolation.koordinatenLinearInterpolieren(start, middle, t1, t12);
+                ArrayList<Location> interpolationListeME =  interpolation.koordinatenLinearInterpolieren(middle, ende, t12, t2);
 
-                for(int i = 0; i < interpolationListe.size(); i++){
-                    Log.e("Latitude", interpolationListe.get(i).getLatitude()+"");
-                    Log.e("Longitude", interpolationListe.get(i).getLongitude()+"");
-                }
-
+                intent.putExtra("GPSData", gbsData);
+                intent.putExtra("interpolationListeSM", interpolationListeSM);
+                intent.putExtra("interpolationListeME", interpolationListeME);
                 startActivity(intent);
             }
         });
@@ -255,5 +250,19 @@ public class GPS extends AppCompatActivity {
 
     public static GPS getInstance(){
         return gps;
+    }
+
+    public ArrayList<Location> parseIntoLocationList(String datensatz[][] ){
+        ArrayList<Location> locations = new ArrayList<Location>();
+
+        for(int i = 0; i < datensatz.length; i++){
+            Location a = new Location("db");
+            a.setLatitude(Double.parseDouble(datensatz[i][0]));
+            a.setLongitude(Double.parseDouble(datensatz[i][1]));
+            a.setAltitude(Double.parseDouble(datensatz[i][2]));
+            a.setTime(Long.parseLong(datensatz[i][3]));
+            locations.add(a);
+        }
+        return  locations;
     }
 }
