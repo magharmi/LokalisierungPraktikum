@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.lang.reflect.Array;
@@ -143,14 +144,24 @@ public class GPS extends AppCompatActivity {
                 middle.setLongitude(7.27066);
                 ende.setLatitude(51.4478);
                 ende.setLongitude(7.27024);
-                t1 = gbsData.get(0).getTime();
-                t2 = gbsData.get(gbsData.size()-1).getTime();
+                t1 = gbsData.get(0).getTime()-5;
+                t2 = gbsData.get(gbsData.size()-1).getTime()-5;
                 long t12 = t2 - 100;
                 Log.e("t1", t1+"");
                 Log.e("t2", t2+"");
                 ArrayList<Location> interpolationListeSM =  interpolation.koordinatenLinearInterpolieren(start, middle, t1, t12);
                 ArrayList<Location> interpolationListeME =  interpolation.koordinatenLinearInterpolieren(middle, ende, t12, t2);
-
+                ArrayList<LatLng> z = new ArrayList<>();
+                gbsData.stream().filter( x->{
+                    interpolationListeSM.stream().filter(j ->{
+                        if(x.getTime() == j.getTime()){
+                            z.add(new LatLng(x.getLatitude(),j.getLongitude()));
+                            z.add(new LatLng(x.getAltitude(),j.getAltitude()));
+                        }
+                        return true;
+                    });
+                    return true;
+                });
                 intent.putExtra("GPSData", gbsData);
                 intent.putExtra("interpolationListeSM", interpolationListeSM);
                 intent.putExtra("interpolationListeME", interpolationListeME);

@@ -28,6 +28,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     double[] latitude, longitude;
     ArrayList<Location> gbsData, interpolationListeSM, interpolationListeME;
+    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             gbsLatLang = new LatLng(gbsData.get(i).getLatitude(), gbsData.get(i).getLongitude());
             position_1.add(gbsLatLang);
         }
+        ArrayList<LatLng> z = new ArrayList<>();
+
+        gbsData.stream().forEach( x->{
+            interpolationListeSM.stream().forEach(j ->{
+
+               if(x.getTime() == j.getTime()){
+                   counter++;
+                   mMap.addPolyline(new PolylineOptions().add(new LatLng(x.getLatitude(),x.getLongitude())).add(new LatLng(j.getLatitude(),j.getLongitude())).width(5).color(Color.YELLOW));
+
+               }
+            });
+            interpolationListeME.stream().forEach(j ->{
+               if(x.getTime() == j.getTime()){
+                   counter++;
+                   mMap.addPolyline(new PolylineOptions().add(new LatLng(x.getLatitude(),x.getLongitude())).add(new LatLng(j.getLatitude(),j.getLongitude())).width(5).color(Color.YELLOW));
+
+               }
+            });
+        });
+
 
 
         polyline = mMap.addPolyline(new PolylineOptions().addAll(position).width(5).color(Color.RED));
