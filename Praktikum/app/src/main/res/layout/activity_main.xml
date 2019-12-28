@@ -43,6 +43,13 @@
 
         />
 
+    <Button
+        android:id="@+id/graph_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Graph"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="455dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -130,93 +130,84 @@ public class GPS extends AppCompatActivity {
         buttonMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(GPS.this, MapsActivity.class);
-                String datensatz[][] = rest.datensatz;
-                ArrayList<Location> gbsData = parseIntoLocationList(datensatz);
-                Location start = new Location("Start");
-                Location middle = new Location("middle");
-                Location ende = new Location("Ende");
-                Interpolation interpolation = new Interpolation();
-                Long t1, t2;
-                start.setLatitude(51.44609);
-                start.setLongitude(7.27231);
-                middle.setLatitude(51.44794);
-                middle.setLongitude(7.27066);
-                ende.setLatitude(51.4478);
-                ende.setLongitude(7.27024);
-                t1 = gbsData.get(0).getTime()-5;
-                t2 = gbsData.get(gbsData.size()-1).getTime()-5;
-                long t12 = t2 - 100;
-                Log.e("t1", t1+"");
-                Log.e("t2", t2+"");
-                ArrayList<Location> interpolationListeSM =  interpolation.koordinatenLinearInterpolieren(start, middle, t1, t12);
-                ArrayList<Location> interpolationListeME =  interpolation.koordinatenLinearInterpolieren(middle, ende, t12, t2);
-                ArrayList<LatLng> z = new ArrayList<>();
-                gbsData.stream().filter( x->{
-                    interpolationListeSM.stream().filter(j ->{
-                        if(x.getTime() == j.getTime()){
-                            z.add(new LatLng(x.getLatitude(),j.getLongitude()));
-                            z.add(new LatLng(x.getAltitude(),j.getAltitude()));
-                        }
-                        return true;
-                    });
-                    return true;
-                });
-                intent.putExtra("GPSData", gbsData);
-                intent.putExtra("interpolationListeSM", interpolationListeSM);
-                intent.putExtra("interpolationListeME", interpolationListeME);
-                startActivity(intent);
+                route2();
             }
         });
     }
 
     public void route1(){
-        long timestampIndoorA = 1574767658; // Startpunkt
-        long timestampIndoorB = 1574767742; // B
-        long timestampIndoorC = 1574771413; // C alter Wert: 1574767764
-        long timestampIndoor3 = 1574767894;
-        long timestampIndoor4 = 1574768010;
-        long timestampIndoor5 = 1574768059;
-
-        ArrayList<ArrayList<Location>> arrayListOutdoorLocation = new ArrayList<>();
+        Intent intent = new Intent(GPS.this, MapsActivity.class);
+        String datensatz[][] = rest.datensatz;
+        ArrayList<Location> gbsData = this.parseIntoLocationList(datensatz);
+        Location start = new Location("Start");
+        Location middle = new Location("middle");
+        Location ende = new Location("Ende");
         Interpolation interpolation = new Interpolation();
-        Location realLocation1 = new Location(getGPSNetwork());
-        Location realLocation2 = new Location(getGPSNetwork());
-        Location gpsLocation = new Location(getGPSNetwork());
-
-        realLocation1.setLatitude(51.44585);
-        realLocation1.setLongitude(7.27273);
-        realLocation2.setLatitude(51.44653);
-        realLocation2.setLongitude(7.27193);
-        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation1, realLocation2, timestampIndoorA, timestampIndoorB));
-        realLocation1.setLatitude(51.44653);
-        realLocation1.setLongitude(7.27193);
-        realLocation2.setLatitude(51.44702);
-        realLocation2.setLongitude(7.27169);
-        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation1, realLocation2, timestampIndoorB, timestampIndoorC));
-        /*
-        realLocation1.setLatitude(51.44702);
-        realLocation1.setLongitude(7.27169);
-        gpsLocation.setLatitude(51.44723);
-        gpsLocation.setLongitude(7.27126);
-        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation, gpsLocation, timestampIndoor3, 1574767894));
-        realLocation.setLatitude(51.44779);
-        realLocation.setLongitude(7.27072);
-        gpsLocation.setLatitude(51.44795);
-        gpsLocation.setLongitude(7.27065);
-        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation, gpsLocation, timestampIndoor4, 1574768010));
-        realLocation.setLatitude(51.44740);
-        realLocation.setLongitude(7.27025);
-        gpsLocation.setLatitude(51.44761);
-        gpsLocation.setLongitude(7.26960);
-        arrayListOutdoorLocation.add(interpolation.koordinatenLinearInterpolieren(realLocation, gpsLocation, timestampIndoor5, 1574768059));
-         */
-
-        Log.e("Size", arrayListOutdoorLocation.size()+"");
-        Log.e("Test", arrayListOutdoorLocation.get(0).size()+"");
-        for(int i = 0; i < arrayListOutdoorLocation.size(); i++) {
-            Log.e("Liste", arrayListOutdoorLocation.get(0).get(0).getLongitude() + "");
-        }
+        Long t1, t2;
+        start.setLatitude(51.445748);
+        start.setLongitude(7.27277);
+        middle.setLatitude(51.44788);
+        middle.setLongitude(7.270667);
+        ende.setLatitude(51.447737);
+        ende.setLongitude(7.270097);
+        t1 = gbsData.get(0).getTime();
+        t2 = gbsData.get(gbsData.size()-1).getTime();
+        long t12 = gbsData.get(gbsData.size()-7).getTime();
+        long g = t2-t1;
+        Log.e("t1", t1+"");
+        Log.e("t2", t2+"");
+        ArrayList<Location> interpolationListeSM =  interpolation.koordinatenLinearInterpolieren(start, middle, t1, t12);
+        ArrayList<Location> interpolationListeME =  interpolation.koordinatenLinearInterpolieren(middle, ende, t12, t2);
+        ArrayList<LatLng> z = new ArrayList<>();
+        gbsData.stream().filter( x->{
+            interpolationListeSM.stream().filter(j ->{
+                if(x.getTime() == j.getTime()){
+                    z.add(new LatLng(x.getLatitude(),j.getLongitude()));
+                    z.add(new LatLng(x.getAltitude(),j.getAltitude()));
+                }
+                return true;
+            });
+            return true;
+        });
+        intent.putExtra("GPSData", gbsData);
+        intent.putExtra("interpolationListeSM", interpolationListeSM);
+        intent.putExtra("interpolationListeME", interpolationListeME);
+        startActivity(intent);
+    }
+    public void route2(){
+        Intent intent = new Intent(GPS.this, MapsActivity.class);
+        String datensatz[][] = rest.datensatz;
+        ArrayList<Location> gbsData = this.parseIntoLocationList(datensatz);
+        Location start = new Location("Start");
+        Location middle = new Location("middle");
+        Location ende = new Location("Ende");
+        Interpolation interpolation = new Interpolation();
+        Long t1, t2;
+        start.setLatitude(51.6310796);
+        start.setLongitude(7.1937187);
+        ende.setLatitude(51.6346145);
+        ende.setLongitude(7.1938935);
+        t1 = gbsData.get(0).getTime();
+        t2 = gbsData.get(gbsData.size()-1).getTime();
+        Log.e("t1", t1+"");
+        Log.e("t2", t2+"");
+        ArrayList<Location> interpolationListeSM =  interpolation.koordinatenLinearInterpolieren(start, ende, t1, t2);
+        ArrayList<Location> interpolationListeME =  new ArrayList<>();
+        ArrayList<LatLng> z = new ArrayList<>();
+        gbsData.stream().filter( x->{
+            interpolationListeSM.stream().filter(j ->{
+                if(x.getTime() == j.getTime()){
+                    z.add(new LatLng(x.getLatitude(),j.getLongitude()));
+                    z.add(new LatLng(x.getAltitude(),j.getAltitude()));
+                }
+                return true;
+            });
+            return true;
+        });
+        intent.putExtra("GPSData", gbsData);
+        intent.putExtra("interpolationListeSM", interpolationListeSM);
+        intent.putExtra("interpolationListeME", interpolationListeME);
+        startActivity(intent);
     }
 
     public void konfigurationAktiv(boolean aktivDeaktiv){
@@ -271,7 +262,7 @@ public class GPS extends AppCompatActivity {
             a.setLatitude(Double.parseDouble(datensatz[i][0]));
             a.setLongitude(Double.parseDouble(datensatz[i][1]));
             a.setAltitude(Double.parseDouble(datensatz[i][2]));
-            a.setTime(Long.parseLong(datensatz[i][3]));
+            a.setTime(Long.parseLong(datensatz[i][3])*1000);
             locations.add(a);
         }
         return  locations;
